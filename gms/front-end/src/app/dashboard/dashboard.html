@@ -1,0 +1,28 @@
+<kendo-grid
+  [data]="dataSource"
+  [skip]="state.skip"
+  [pageSize]="state.take"
+  [group]="state.group"
+  [sortable]="{ mode: 'multiple' }"
+  [groupable]="{ showFooter: true }"
+  [pageable]="true"
+  [height]="530"
+  (dataStateChange)="dataStateChange($event)">
+    
+    <kendo-grid-column field="id" title="ID" [width]="80"></kendo-grid-column>
+    <kendo-grid-column field="game" title="Game" [width]="250"></kendo-grid-column>
+    <kendo-grid-column field="level" title="Level" [width]="150"></kendo-grid-column>
+    <kendo-grid-column field="startdate" title="Start Date" [width]="120"></kendo-grid-column>
+    <kendo-grid-column field="enddate" title="End Date" [width]="120"></kendo-grid-column>
+    <kendo-grid-column field="score" title="Score" [width]="200">
+        <ng-template
+            kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>Sum: {{aggregates["score"].sum}}
+        </ng-template>
+        <ng-template
+            kendoGridFooterTemplate
+                let-column="column">Total {{column.title}}: {{total["score"].sum}}
+        </ng-template>
+    </kendo-grid-column>
+</kendo-grid>
